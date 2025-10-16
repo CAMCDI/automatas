@@ -2,49 +2,40 @@ from MiniLangVisitor import MiniLangVisitor
 
 class EvalVisitor(MiniLangVisitor):
     def __init__(self):
-        self.memory = {}  # Para guardar variables
+        self.memory = {}
+        self.output = []
 
-    # Programa: recorrer todas las statements
     def visitProgram(self, ctx):
         for stmt in ctx.statement():
             self.visit(stmt)
-        return None
+        return "\n".join(map(str, self.output))
 
-    # Asignación: ID = expr
     def visitAssign(self, ctx):
         var_name = ctx.ID().getText()
         value = self.visit(ctx.expr())
         self.memory[var_name] = value
         return value
 
-    # Print: print(expr)
     def visitPrint(self, ctx):
         value = self.visit(ctx.expr())
-        print(value)
+        self.output.append(value)
         return value
 
-    # Expresiones
     def visitExpr(self, ctx):
-        # Número literal
         if ctx.INT():
             return int(ctx.INT().getText())
-
-        # Variable
         elif ctx.ID():
             var_name = ctx.ID().getText()
             if var_name not in self.memory:
                 raise NameError(f"Variable '{var_name}' no definida")
             return self.memory[var_name]
-
-        # Operación binaria o paréntesis
         elif ctx.getChildCount() == 3:
-            # Paréntesis
             if ctx.getChild(0).getText() == '(':
                 return self.visit(ctx.expr(0))
             else:
                 left = self.visit(ctx.expr(0))
                 right = self.visit(ctx.expr(1))
-                op = ctx.op.text
+                op = ctx.getChild(1).getText()
                 if op == '+':
                     return left + right
                 elif op == '-':
@@ -56,3 +47,4 @@ class EvalVisitor(MiniLangVisitor):
                         raise ValueError("División por cero")
                     return left / right
         return 0
+

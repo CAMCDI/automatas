@@ -11,10 +11,10 @@ def evaluate_expression(code: str):
 
     tree = parser.program()
     visitor = EvalVisitor()
-    visitor.visit(tree)
+    return visitor.visit(tree)
 
-if _name_ == "_main_":
-    # Pedimos los números al usuario
+if __name__ == "__main__":
+    # Pedimos los números al usuario en consola
     x = input("Ingresa x: ")
     y = input("Ingresa y: ")
 
