@@ -1,4 +1,4 @@
-from MiniLangVisitor import MiniLangVisitor
+from .MiniLangVisitor import MiniLangVisitor
 
 class EvalVisitor(MiniLangVisitor):
     def __init__(self):
@@ -47,4 +47,3 @@ class EvalVisitor(MiniLangVisitor):
                         raise ValueError("División por cero")
                     return left / right
         return 0
-

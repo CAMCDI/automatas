@@ -1,7 +1,7 @@
 # Generated from MiniLang.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
-    from .MiniLangParser import MiniLangParser
+    from .core.MiniLangParser import MiniLangParser
 else:
     from MiniLangParser import MiniLangParser
 
