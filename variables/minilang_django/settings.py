@@ -14,7 +14,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-myk1l&@ddei5=^xinw07(qn**&0tas03yq!pqn04bd77*q0)24'
 DEBUG = True
 # settings.py
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["automatas-zglp.onrender.com", ".onrender.com"]
+
 
 
 
