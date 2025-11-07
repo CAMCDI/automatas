@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+</head>
+<body style="font-family: Arial; padding: 20px; background: #f0f0f0;">
+    <div style="max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px;">
+        <h1 style="text-align: center; color: #2c3e50;">Resultado</h1>
+        
+        <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <strong>Tu código:</strong>
+            <pre style="background: #2c3e50; color: white; padding: 10px; border-radius: 5px; margin-top: 8px;">{{ code }}</pre>
+        </div>
+
+        {% if success %}
+            <div style="background: #e8f6ef; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <h3 style="color: #27ae60; margin-top: 0;">Todo bien!</h3>
+                
+                {% if output %}
+                <div style="margin-bottom: 15px;">
+                    <strong>Salida:</strong>
+                    <div style="background: white; padding: 10px; border-radius: 5px; margin-top: 5px;">
+                        {% for line in output %}
+                        <div>{{ line }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div style="margin-bottom: 15px;">
+                    <strong>Al final quedó:</strong>
+                    <div style="background: white; padding: 10px; border-radius: 5px; margin-top: 5px; font-family: monospace;">
+                        {{ result }}
+                    </div>
+                </div>
+
+                {% if iterations %}
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 10px;">Asi se hizo:</h4>
+                    {% for iter in iterations %}
+                    <div style="background: white; margin-bottom: 10px; padding: 10px; border-radius: 5px; border-left: 4px solid #3498db;">
+                        <div style="margin-bottom: 5px;">
+                            <strong>Vuelta {{ iter.numero }}:</strong> {{ iter.condicion }}
+                        </div>
+                        {% if iter.variables_antes %}
+                        <div style="font-size: 14px; color: #666;">
+                            Empezó: {{ iter.variables_antes }}
+                        </div>
+                        {% endif %}
+                        {% if iter.variables_despues %}
+                        <div style="font-size: 14px; color: #666;">
+                            Terminó: {{ iter.variables_despues }}
+                        </div>
+                        {% endif %}
+                        {% if iter.mensaje %}
+                        <div style="font-style: italic; color: #e74c3c; margin-top: 5px;">
+                            {{ iter.mensaje }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <div style="background: #fde8e8; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <h3 style="color: #e74c3c; margin-top: 0;">Error</h3>
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        <a href="{% url 'index' %}" style="display: block; text-align: center; background: #3498db; color: white; padding: 12px; text-decoration: none; border-radius: 8px; margin-top: 20px;">
+            Probar otro código
+        </a>
+    </div>
+</body>
+</html>

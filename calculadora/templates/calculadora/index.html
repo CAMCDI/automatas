@@ -1,0 +1,52 @@
+{% extends 'calculadora/base.html' %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="mb-0">Calculadora Condicional</h4>
+            </div>
+            <div class="card-body">
+                <form id="calculadoraForm">
+                    {% csrf_token %}
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="valor_x" class="form-label">Valor de X:</label>
+                            <input type="number" class="form-control" id="valor_x" placeholder="Ingresa X">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="valor_y" class="form-label">Valor de Y:</label>
+                            <input type="number" class="form-control" id="valor_y" placeholder="Ingresa Y">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="operador" class="form-label">Operador de comparación:</label>
+                        <select class="form-select" id="operador">
+                            <option value=">">Mayor que (>)</option>
+                            <option value="<">Menor que (<)</option>
+                            <option value="==">Igual (==)</option>
+                            <option value="!=">Diferente (!=)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mb-2">
+                        Calcular
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
+                        Limpiar
+                    </button>
+                </form>
+
+                <div id="resultado" class="resultado" style="display: none;">
+                    <div id="resultadoContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

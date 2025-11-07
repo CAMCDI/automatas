@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intérprete For</title>
+</head>
+<body style="font-family: Arial; padding: 20px; background: #f0f0f0;">
+    <div style="max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px;">
+        <h1 style="text-align: center; color: #2c3e50;">Intérprete de For</h1>
+        
+        <form method="post" action="{% url 'execute_code' %}">
+            {% csrf_token %}
+            <textarea name="code" placeholder="for(i=0;i<5;i=i+1){x=x+1;}" required style="width: 100%; height: 120px; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-family: monospace; font-size: 14px; resize: vertical; margin-bottom: 15px;">{% if code %}{{ code }}{% endif %}</textarea>
+            <button type="submit" style="background: #3498db; color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%;">Ejecutar</button>
+        </form>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <p style="margin-bottom: 10px;"><strong>Ejemplos:</strong></p>
+            <button onclick="setCode('for(i=0;i<5;i=i+1){x=x+1;}')" style="background: #95a5a6; color: white; padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; margin: 5px;">For Simple</button>
+            <button onclick="setCode('x=0; for(i=0;i<3;i=i+1){x=x+2;}')" style="background: #95a5a6; color: white; padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; margin: 5px;">For con X</button>
+            <button onclick="setCode('suma=0; for(i=0;i<4;i=i+1){suma=suma+i;}')" style="background: #95a5a6; color: white; padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; margin: 5px;">Suma</button>
+            <button onclick="setCode('for(i=0;i<3;i=i+1){print i;}')" style="background: #95a5a6; color: white; padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; margin: 5px;">For con Print</button>
+        </div>
+    </div>
+
+    <script>
+        function setCode(code) {
+            document.querySelector('textarea').value = code;
+        }
+    </script>
+</body>
+</html>
