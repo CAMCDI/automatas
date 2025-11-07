@@ -171,3 +171,5 @@ def execute_code(request):
             })
     
     return render(request, 'code_interpreter/index.html')
+
+print
